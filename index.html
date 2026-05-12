@@ -18,7 +18,13 @@
     }
 
     * { box-sizing: border-box; }
-    html, body { margin: 0; padding: 0; font-family: "Inter", "PingFang SC", "Microsoft YaHei", sans-serif; color: var(--text); background: var(--bg); }
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: "Inter", "PingFang SC", "Microsoft YaHei", sans-serif;
+      color: var(--text);
+      background: var(--bg);
+    }
     a { text-decoration: none; color: inherit; }
 
     .container {
@@ -70,8 +76,8 @@
       text-align: center;
     }
     .hero h2 {
-        text-align: left;
-        white-space: nowrap;
+      text-align: left;
+      white-space: nowrap;
     }
     .section-subtitle {
       margin: 0 auto 20px;
@@ -122,11 +128,6 @@
       text-transform: uppercase;
       opacity: .95;
     }
-    .hero h1 {
-      margin: 0 0 16px;
-      font-size: clamp(32px, 6vw, 60px);
-      line-height: 1.05;
-    }
     .hero p {
       margin: 0 0 24px;
       font-size: 17px;
@@ -139,27 +140,70 @@
       flex-wrap: wrap;
     }
 
-    .two-gif-grid {
-      margin-top: 34px;
+    .paper-cover {
+      max-width: 760px;
+      margin: 26px auto 18px;
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: #fff;
+    }
+    .paper-cover img {
+      width: 100%;
+      display: block;
+      aspect-ratio: 16 / 8;
+      object-fit: cover;
+    }
+
+    .media-section-title {
+      margin: 34px 0 10px;
+      text-align: center;
+      font-size: 24px;
+      letter-spacing: -0.01em;
+      color: #233044;
+    }
+
+    /* 每一行单独标题 */
+    .video-row {
+      margin-top: 22px;
+    }
+    .row-title {
+      margin: 0 0 14px;
+      text-align: center;
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #1f2a3d;
+    }
+    .video-grid-row {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(3, 1fr);
       gap: 22px;
     }
+
     .media-card {
       background: var(--card);
       border: 1px solid var(--line);
       border-radius: var(--radius);
       overflow: hidden;
     }
-    .media-card img {
+    .media-card video {
       width: 100%;
       aspect-ratio: 16 / 10;
       object-fit: cover;
       display: block;
-      background: #e8edf4;
+      background: #000;
+    }
+    .media-body {
+      padding: 14px 16px 18px;
+    }
+    .media-title {
+      margin: 0 0 6px;
+      font-size: 18px;
+      color: #1e293b;
     }
     .media-caption {
-      padding: 14px 16px 18px;
+      margin: 0;
       color: #2a3345;
       font-size: 15px;
       line-height: 1.65;
@@ -336,10 +380,12 @@
 
     @media (max-width: 900px) {
       section { padding: 64px 0; }
-      .two-gif-grid, .app-grid, .resource-grid { grid-template-columns: 1fr; }
+      .video-grid-row, .app-grid, .resource-grid { grid-template-columns: 1fr; }
       .nav-links { display: none; }
       .hero, .cta-vision { min-height: 520px; }
       .app-card h4 { font-size: 21px; }
+      .hero h2 { white-space: normal; }
+      .row-title { font-size: 24px; }
     }
   </style>
 </head>
@@ -365,9 +411,9 @@
       <div class="container">
         <div class="content">
           <p class="eyebrow">Introducing Pelican-Unify 1.0</p>
-          <h2>Reason.  Imagine.  Act.<br>In One Unified Foundation Model</h2>
+          <h2>Reason. Imagine. Act. In One Unified Foundation Model</h2>
           <p>
-            Pelican-Unify 1.0 closes the reason–imagine–act loop for embodied intelligence. Through a shared representation, it unifies chain-of-thought reasoning, future video imagination, and low-level action generation, enabling robots to understand goals, anticipate consequences, and act with foresight in the real world.
+            Pelican-Unify 1.0 closes the reason-imagine-act loop for embodied intelligence. Through a shared representation, it unifies chain-of-thought reasoning, future video imagination, and low-level action generation, enabling robots to understand goals, anticipate consequences, and act with foresight in the real world.
           </p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="https://ai.meta.com/research/" target="_blank">Download Pelican-Unify 1.0</a>
@@ -379,24 +425,109 @@
 
     <section id="s2">
       <div class="container">
-        <h2>Understand, predict, plan</h2>
+        <h2>Reason, imagine, and act as one loop</h2>
         <p class="section-subtitle">
-          Pelican-Unify 1.0 is the next step toward AI that understands physical reality, anticipates outcomes,
-          and plans efficient strategies with minimal supervision.
+          Pelican-Unify treats reasoning, imagination, and action as three mutually reinforcing capabilities. The model reasons about the task, imagines future visual outcomes, and generates executable robot actions within one closed-loop system.
         </p>
+
+        <div class="paper-cover">
+          <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1400&q=80" alt="Research paper placeholder image" />
+        </div>
+
         <p style="text-align:center; margin: 0;">
           <a class="btn btn-white" href="https://arxiv.org/" target="_blank">Read the research paper</a>
         </p>
+        <!-- 第一行 -->
+        <div class="video-row">
+          <h4 class="row-title">Reasoning</h4>
+          <div class="video-grid-row">
+            <article class="media-card">
+              <video controls muted loop>
+                <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
+              </video>
+              <div class="media-body">
+                <p class="media-caption">Task decomposition and visual context understanding.</p>
+              </div>
+            </article>
+            <article class="media-card">
+              <video controls muted loop>
+                <source src="https://www.w3schools.com/html/movie.mp4" type="video/mp4" />
+              </video>
+              <div class="media-body">
+                <p class="media-caption">Constraint-aware reasoning for object manipulation.</p>
+              </div>
+            </article>
+            <article class="media-card">
+              <video controls muted loop>
+                <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
+              </video>
+              <div class="media-body">
+                <p class="media-caption">Multi-step decision making under uncertainty.</p>
+              </div>
+            </article>
+          </div>
+        </div>
 
-        <div class="two-gif-grid">
-          <article class="media-card">
-            <img src="https://media.giphy.com/media/3o7TKU8RvQuomFfUUU/giphy.gif" alt="Demo GIF 1" />
-            <div class="media-caption">Scene understanding demo: model tracks objects and predicts temporal changes.</div>
-          </article>
-          <article class="media-card">
-            <img src="https://media.giphy.com/media/l41YtZOb9EUABnuqA/giphy.gif" alt="Demo GIF 2" />
-            <div class="media-caption">Planning demo: model infers future dynamics and supports control decisions.</div>
-          </article>
+        <!-- 第二行 -->
+        <div class="video-row">
+          <h4 class="row-title">Imagining</h4>
+          <div class="video-grid-row">
+            <article class="media-card">
+              <video controls muted loop>
+                <source src="https://www.w3schools.com/html/movie.mp4" type="video/mp4" />
+              </video>
+              <div class="media-body">
+                <p class="media-caption">Future rollout prediction from current observations.</p>
+              </div>
+            </article>
+            <article class="media-card">
+              <video controls muted loop>
+                <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
+              </video>
+              <div class="media-body">
+                <p class="media-caption">Alternative outcome imagination for safer planning.</p>
+              </div>
+            </article>
+            <article class="media-card">
+              <video controls muted loop>
+                <source src="https://www.w3schools.com/html/movie.mp4" type="video/mp4" />
+              </video>
+              <div class="media-body">
+                <p class="media-caption">Visual simulation under dynamic environment shifts.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <!-- 第三行 -->
+        <div class="video-row">
+          <h4 class="row-title">Acting</h4>
+          <div class="video-grid-row">
+            <article class="media-card">
+              <video controls muted loop>
+                <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
+              </video>
+              <div class="media-body">
+                <p class="media-caption">Closed-loop action generation for grasping tasks.</p>
+              </div>
+            </article>
+            <article class="media-card">
+              <video controls muted loop>
+                <source src="https://www.w3schools.com/html/movie.mp4" type="video/mp4" />
+              </video>
+              <div class="media-body">
+                <p class="media-caption">Goal-conditioned policy execution and correction.</p>
+              </div>
+            </article>
+            <article class="media-card">
+              <video controls muted loop>
+                <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
+              </video>
+              <div class="media-body">
+                <p class="media-caption">Robust manipulation with real-time feedback control.</p>
+              </div>
+            </article>
+          </div>
         </div>
       </div>
     </section>
@@ -431,42 +562,12 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>Planning & Control</td>
-                <td>Reach</td>
-                <td>100%</td>
-                <td>100% (Octo)</td>
-              </tr>
-              <tr>
-                <td>Planning & Control</td>
-                <td>Grasp</td>
-                <td>45%</td>
-                <td>8% (Octo)</td>
-              </tr>
-              <tr>
-                <td>Planning & Control</td>
-                <td>Pick-and-place</td>
-                <td>73%</td>
-                <td>13% (Octo)</td>
-              </tr>
-              <tr>
-                <td>Prediction</td>
-                <td>Epic-Kitchens-100</td>
-                <td>39.7%</td>
-                <td>27.6%</td>
-              </tr>
-              <tr>
-                <td>Understanding</td>
-                <td>Something-Something V2</td>
-                <td>77.3%</td>
-                <td>69.7%</td>
-              </tr>
-              <tr>
-                <td>Understanding</td>
-                <td>Perception Test</td>
-                <td>84.0%</td>
-                <td>82.7%</td>
-              </tr>
+              <tr><td>Planning & Control</td><td>Reach</td><td>100%</td><td>100% (Octo)</td></tr>
+              <tr><td>Planning & Control</td><td>Grasp</td><td>45%</td><td>8% (Octo)</td></tr>
+              <tr><td>Planning & Control</td><td>Pick-and-place</td><td>73%</td><td>13% (Octo)</td></tr>
+              <tr><td>Prediction</td><td>Epic-Kitchens-100</td><td>39.7%</td><td>27.6%</td></tr>
+              <tr><td>Understanding</td><td>Something-Something V2</td><td>77.3%</td><td>69.7%</td></tr>
+              <tr><td>Understanding</td><td>Perception Test</td><td>84.0%</td><td>82.7%</td></tr>
             </tbody>
           </table>
         </div>
@@ -515,18 +616,14 @@
             <img src="https://images.unsplash.com/photo-1581093458791-9d09be4e38f4?auto=format&fit=crop&w=1200&q=80" alt="Robotic assistants" />
             <div class="body">
               <h4>Robotic assistants</h4>
-              <p>
-                A next era of robotics that helps with physical tasks in dynamic environments.
-              </p>
+              <p>A next era of robotics that helps with physical tasks in dynamic environments.</p>
             </div>
           </article>
           <article class="app-card">
             <img src="https://images.unsplash.com/photo-1507035895480-2b3156c31fc8?auto=format&fit=crop&w=1200&q=80" alt="Wearable assistants" />
             <div class="body">
               <h4>Wearable assistants</h4>
-              <p>
-                Real-time wearable intelligence for safer navigation and daily assistance.
-              </p>
+              <p>Real-time wearable intelligence for safer navigation and daily assistance.</p>
             </div>
           </article>
         </div>
