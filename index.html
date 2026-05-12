@@ -1,0 +1,587 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pelican-Unify 1.0</title>
+  <style>
+    :root {
+      --bg: #f1f4f8;
+      --text: #1c2432;
+      --muted: #5d6678;
+      --card: #ffffff;
+      --line: #dbe2ec;
+      --brand: #0b5fff;
+      --brand-dark: #0849c9;
+      --radius: 16px;
+      --max: 1120px;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; font-family: "Inter", "PingFang SC", "Microsoft YaHei", sans-serif; color: var(--text); background: var(--bg); }
+    a { text-decoration: none; color: inherit; }
+
+    .container {
+      width: min(var(--max), calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: #0855D4;
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+    }
+    .nav-inner {
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      color: #fff;
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: .5px;
+    }
+    .nav-links {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .nav-links a {
+      color: #dfe7ff;
+      font-size: 14px;
+      padding: 6px 10px;
+      border-radius: 8px;
+    }
+    .nav-links a:hover { background: rgba(255,255,255,0.08); }
+
+    main { margin-top: 64px; }
+
+    section { padding: 80px 0; }
+    h2 {
+      margin: 0 0 14px;
+      font-size: clamp(28px, 4.2vw, 52px);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      text-align: center;
+    }
+    .section-subtitle {
+      margin: 0 auto 20px;
+      max-width: 760px;
+      text-align: center;
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 16px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      border-radius: 999px;
+      padding: 0 20px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: .2s;
+      font-size: 14px;
+      font-weight: 600;
+    }
+    .btn-primary { background: var(--brand); color: #fff; }
+    .btn-primary:hover { background: var(--brand-dark); }
+    .btn-white { background: #fff; color: #182132; border-color: #d7deea; }
+    .btn-white:hover { background: #f8fbff; }
+
+    .hero {
+      min-height: 620px;
+      display: flex;
+      align-items: center;
+      color: #fff;
+      background:
+        linear-gradient(90deg, rgba(10,16,32,.78) 0%, rgba(10,16,32,.48) 45%, rgba(10,16,32,.2) 100%),
+        url("https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1920&q=80")
+        center/cover no-repeat;
+    }
+    .hero .content {
+      max-width: 560px;
+      padding: 30px 0;
+    }
+    .eyebrow {
+      margin: 0 0 12px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      opacity: .95;
+    }
+    .hero h1 {
+      margin: 0 0 16px;
+      font-size: clamp(32px, 6vw, 60px);
+      line-height: 1.05;
+    }
+    .hero p {
+      margin: 0 0 24px;
+      font-size: 17px;
+      line-height: 1.75;
+      color: #e7edff;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .two-gif-grid {
+      margin-top: 34px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+    }
+    .media-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .media-card img {
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+      display: block;
+      background: #e8edf4;
+    }
+    .media-caption {
+      padding: 14px 16px 18px;
+      color: #2a3345;
+      font-size: 15px;
+      line-height: 1.65;
+    }
+
+    .video-wrap {
+      margin-top: 30px;
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: #fff;
+    }
+    .video-wrap video {
+      width: 100%;
+      display: block;
+      aspect-ratio: 16 / 9;
+      background: #000;
+    }
+
+    .table-card {
+      margin-top: 30px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 760px;
+    }
+    th, td {
+      text-align: left;
+      padding: 14px 16px;
+      border-bottom: 1px solid #e8edf5;
+      font-size: 15px;
+    }
+    th {
+      background: #edf3fb;
+      color: #243146;
+      font-weight: 700;
+    }
+    tr:last-child td { border-bottom: none; }
+    .table-scroll { overflow-x: auto; }
+
+    .single-image {
+      margin-top: 28px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: #fff;
+    }
+    .single-image img {
+      width: 100%;
+      display: block;
+      aspect-ratio: 16 / 8;
+      object-fit: cover;
+    }
+
+    .cta-vision {
+      min-height: 560px;
+      display: flex;
+      align-items: center;
+      color: #fff;
+      background:
+        linear-gradient(90deg, rgba(10,16,32,.75) 0%, rgba(10,16,32,.35) 40%, rgba(10,16,32,.12) 100%),
+        url("https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1920&q=80")
+        center/cover no-repeat;
+    }
+    .cta-vision .content { max-width: 480px; }
+
+    .app-grid {
+      margin-top: 32px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .app-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .app-card img {
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+      display: block;
+    }
+    .app-card .body {
+      padding: 15px 16px 18px;
+    }
+    .app-card h4 {
+      margin: 0 0 8px;
+      font-size: 24px;
+    }
+    .app-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
+    .resource-grid {
+      margin-top: 28px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px 20px;
+    }
+    .resource-link {
+      background: #eef3fa;
+      border: 1px solid #d8e1ee;
+      border-radius: 12px;
+      padding: 13px 16px;
+      font-size: 15px;
+      color: #2a3448;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: .2s;
+    }
+    .resource-link:hover {
+      background: #e7eef9;
+      border-color: #c9d5e8;
+      transform: translateY(-1px);
+    }
+
+    footer {
+      padding: 40px 0 60px;
+      color: #73809a;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      background: rgba(4, 8, 16, .78);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .modal.open { display: flex; }
+    .modal-box {
+      width: min(980px, 100%);
+      background: #0d1320;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.15);
+      overflow: hidden;
+      position: relative;
+    }
+    .modal-close {
+      position: absolute;
+      right: 12px;
+      top: 10px;
+      border: none;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.16);
+      color: #fff;
+      font-size: 20px;
+      cursor: pointer;
+      z-index: 2;
+    }
+    .modal video {
+      width: 100%;
+      display: block;
+      aspect-ratio: 16/9;
+      background: #000;
+    }
+
+    @media (max-width: 900px) {
+      section { padding: 64px 0; }
+      .two-gif-grid, .app-grid, .resource-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .hero, .cta-vision { min-height: 520px; }
+      .app-card h4 { font-size: 21px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <div class="container nav-inner">
+      <div class="logo">Pelican-Unify 1.0</div>
+      <nav class="nav-links">
+        <a href="#s1">介绍</a>
+        <a href="#s2">能力</a>
+        <a href="#s3">机器人规划</a>
+        <a href="#s4">性能</a>
+        <a href="#s5">架构</a>
+        <a href="#s6">愿景</a>
+        <a href="#s7">应用</a>
+        <a href="#s8">资源</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section id="s1" class="hero">
+      <div class="container">
+        <div class="content">
+          <p class="eyebrow">Introducing Pelican-Unify 1.0</p>
+          <h1>Reason.Imagine.Act.<br />In One Unified Foundation Model.</h1>
+          <p>
+            Pelican-Unify 1.0 closes the reason–imagine–act loop for embodied intelligence. Through a shared representation, it unifies chain-of-thought reasoning, future video imagination, and low-level action generation, enabling robots to understand goals, anticipate consequences, and act with foresight in the real world.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="https://ai.meta.com/research/" target="_blank">Download Pelican-Unify 1.0</a>
+            <a class="btn btn-white" href="#s2">Learn more</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="s2">
+      <div class="container">
+        <h2>Understand, predict, plan</h2>
+        <p class="section-subtitle">
+          Pelican-Unify 1.0 is the next step toward AI that understands physical reality, anticipates outcomes,
+          and plans efficient strategies with minimal supervision.
+        </p>
+        <p style="text-align:center; margin: 0;">
+          <a class="btn btn-white" href="https://arxiv.org/" target="_blank">Read the research paper</a>
+        </p>
+
+        <div class="two-gif-grid">
+          <article class="media-card">
+            <img src="https://media.giphy.com/media/3o7TKU8RvQuomFfUUU/giphy.gif" alt="Demo GIF 1" />
+            <div class="media-caption">Scene understanding demo: model tracks objects and predicts temporal changes.</div>
+          </article>
+          <article class="media-card">
+            <img src="https://media.giphy.com/media/l41YtZOb9EUABnuqA/giphy.gif" alt="Demo GIF 2" />
+            <div class="media-caption">Planning demo: model infers future dynamics and supports control decisions.</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="s3">
+      <div class="container">
+        <h2>Planning for robotic control</h2>
+        <p class="section-subtitle">
+          By specifying tasks as goal images, Pelican-Unify 1.0 can accomplish grasping and pick-and-place tasks,
+          and adapt to unfamiliar objects and environments.
+        </p>
+        <div class="video-wrap">
+          <video controls poster="https://images.unsplash.com/photo-1581092787765-e3feb951d987?auto=format&fit=crop&w=1400&q=80">
+            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
+            您的浏览器不支持 video 标签。
+          </video>
+        </div>
+      </div>
+    </section>
+
+    <section id="s4">
+      <div class="container">
+        <h2>Evaluating Pelican-Unify 1.0’s Performance</h2>
+        <div class="table-card table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Task Type</th>
+                <th>Benchmark</th>
+                <th>Pelican-Unify 1.0</th>
+                <th>Previous Best</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Planning & Control</td>
+                <td>Reach</td>
+                <td>100%</td>
+                <td>100% (Octo)</td>
+              </tr>
+              <tr>
+                <td>Planning & Control</td>
+                <td>Grasp</td>
+                <td>45%</td>
+                <td>8% (Octo)</td>
+              </tr>
+              <tr>
+                <td>Planning & Control</td>
+                <td>Pick-and-place</td>
+                <td>73%</td>
+                <td>13% (Octo)</td>
+              </tr>
+              <tr>
+                <td>Prediction</td>
+                <td>Epic-Kitchens-100</td>
+                <td>39.7%</td>
+                <td>27.6%</td>
+              </tr>
+              <tr>
+                <td>Understanding</td>
+                <td>Something-Something V2</td>
+                <td>77.3%</td>
+                <td>69.7%</td>
+              </tr>
+              <tr>
+                <td>Understanding</td>
+                <td>Perception Test</td>
+                <td>84.0%</td>
+                <td>82.7%</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section id="s5">
+      <div class="container">
+        <h2>Self-supervised world model</h2>
+        <p class="section-subtitle">
+          The encoder and predictor are pre-trained on large-scale videos, then fine-tuned with limited robot data
+          to enable efficient planning in real-world tasks.
+        </p>
+        <div class="single-image">
+          <img src="https://images.unsplash.com/photo-1555255707-c07966088b7b?auto=format&fit=crop&w=1600&q=80" alt="Model architecture image" />
+        </div>
+      </div>
+    </section>
+
+    <section id="s6" class="cta-vision">
+      <div class="container">
+        <div class="content">
+          <p class="eyebrow">World Models</p>
+          <h2 style="text-align:left; color:#fff; margin-bottom:14px; font-size:clamp(34px,5vw,56px);">Our vision for world models</h2>
+          <p style="color:#e6ecff; line-height:1.8; margin:0 0 22px;">
+            What if AI could reason and plan as effectively as we do? This is one of the grand scientific challenges
+            we’re tackling at Meta.
+          </p>
+          <button class="btn btn-white" id="openModalBtn">Watch now</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="s7">
+      <div class="container">
+        <h2>Potential model applications</h2>
+        <p class="section-subtitle">
+          Pelican-Unify 1.0 can unlock new experiences and support practical applications across domains.
+        </p>
+        <p style="text-align:center; margin: 0;">
+          <a class="btn btn-white" href="https://ai.meta.com/" target="_blank">Download the model</a>
+        </p>
+
+        <div class="app-grid">
+          <article class="app-card">
+            <img src="https://images.unsplash.com/photo-1581093458791-9d09be4e38f4?auto=format&fit=crop&w=1200&q=80" alt="Robotic assistants" />
+            <div class="body">
+              <h4>Robotic assistants</h4>
+              <p>
+                A next era of robotics that helps with physical tasks in dynamic environments.
+              </p>
+            </div>
+          </article>
+          <article class="app-card">
+            <img src="https://images.unsplash.com/photo-1507035895480-2b3156c31fc8?auto=format&fit=crop&w=1200&q=80" alt="Wearable assistants" />
+            <div class="body">
+              <h4>Wearable assistants</h4>
+              <p>
+                Real-time wearable intelligence for safer navigation and daily assistance.
+              </p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="s8" style="padding-bottom: 90px;">
+      <div class="container">
+        <h2 style="font-size: clamp(30px, 4vw, 44px);">Explore Pelican-Unify 1.0</h2>
+        <div class="resource-grid">
+          <a class="resource-link" href="https://ai.meta.com/" target="_blank"><span>More from AI at Meta</span><span>↗</span></a>
+          <a class="resource-link" href="https://arxiv.org/" target="_blank"><span>Read the research paper</span><span>↗</span></a>
+          <a class="resource-link" href="https://huggingface.co/" target="_blank"><span>Pelican-Unify 1.0 on Hugging Face</span><span>↗</span></a>
+          <a class="resource-link" href="https://github.com/" target="_blank"><span>Download Pelican-Unify 1.0</span><span>↗</span></a>
+          <a class="resource-link" href="https://ai.meta.com/research/" target="_blank"><span>Read more about Pelican-Unify 1.0</span><span>↗</span></a>
+          <a class="resource-link" href="https://ai.meta.com/research/" target="_blank"><span>Download Pelican-Unify 1.0</span><span>↗</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">© 2026 Pelican-Unify 1.0 Demo Page</div>
+  </footer>
+
+  <div class="modal" id="videoModal">
+    <div class="modal-box">
+      <button class="modal-close" id="closeModalBtn" aria-label="关闭视频">×</button>
+      <video id="modalVideo" controls>
+        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
+        您的浏览器不支持 video 标签。
+      </video>
+    </div>
+  </div>
+
+  <script>
+    const modal = document.getElementById("videoModal");
+    const openBtn = document.getElementById("openModalBtn");
+    const closeBtn = document.getElementById("closeModalBtn");
+    const modalVideo = document.getElementById("modalVideo");
+
+    openBtn.addEventListener("click", () => {
+      modal.classList.add("open");
+      modalVideo.currentTime = 0;
+      modalVideo.play().catch(() => {});
+    });
+
+    function closeModal() {
+      modal.classList.remove("open");
+      modalVideo.pause();
+    }
+
+    closeBtn.addEventListener("click", closeModal);
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) closeModal();
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeModal();
+    });
+  </script>
+</body>
+</html>
