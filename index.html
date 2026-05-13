@@ -152,7 +152,8 @@
       width: 100%;
       display: block;
       aspect-ratio: 16 / 8;
-      object-fit: cover;
+      object-fit: contain;
+      transform: scale(1.2);
     }
 
     .media-section-title {
@@ -431,7 +432,7 @@
         </p>
 
         <div class="paper-cover">
-          <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1400&q=80" alt="Research paper placeholder image" />
+          <img src="img\20260513-164317.png" alt="Research paper placeholder image" />
         </div>
 
         <p style="text-align:center; margin: 0;">
@@ -532,25 +533,9 @@
       </div>
     </section>
 
-    <section id="s3">
-      <div class="container">
-        <h2>Planning for robotic control</h2>
-        <p class="section-subtitle">
-          By specifying tasks as goal images, Pelican-Unified 1.0 can accomplish grasping and pick-and-place tasks,
-          and adapt to unfamiliar objects and environments.
-        </p>
-        <div class="video-wrap">
-          <video controls poster="https://images.unsplash.com/photo-1581092787765-e3feb951d987?auto=format&fit=crop&w=1400&q=80">
-            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
-            您的浏览器不支持 video 标签。
-          </video>
-        </div>
-      </div>
-    </section>
-
     <section id="s4">
       <div class="container">
-        <h2>Evaluating Pelican-Unified 1.0’s Performance</h2>
+        <h3 style="font-size: 36px; text-align: center; margin:0 0 14px;">Evaluating Pelican-Unified 1.0’s Performance</h3>
         <div class="table-card table-scroll">
           <table>
             <thead>
@@ -574,43 +559,14 @@
       </div>
     </section>
 
-    <section id="s5">
-      <div class="container">
-        <h2>Self-supervised world model</h2>
-        <p class="section-subtitle">
-          The encoder and predictor are pre-trained on large-scale videos, then fine-tuned with limited robot data
-          to enable efficient planning in real-world tasks.
-        </p>
-        <div class="single-image">
-          <img src="https://images.unsplash.com/photo-1555255707-c07966088b7b?auto=format&fit=crop&w=1600&q=80" alt="Model architecture image" />
-        </div>
-      </div>
-    </section>
-
-    <section id="s6" class="cta-vision">
-      <div class="container">
-        <div class="content">
-          <p class="eyebrow">World Models</p>
-          <h2 style="text-align:left; color:#fff; margin-bottom:14px; font-size:clamp(34px,5vw,56px);">Our vision for world models</h2>
-          <p style="color:#e6ecff; line-height:1.8; margin:0 0 22px;">
-            What if AI could reason and plan as effectively as we do? This is one of the grand scientific challenges
-            we’re tackling at Meta.
-          </p>
-          <button class="btn btn-white" id="openModalBtn">Watch now</button>
-        </div>
-      </div>
-    </section>
-
     <section id="s8" style="padding-bottom: 90px;">
       <div class="container">
-        <h2 style="font-size: clamp(30px, 4vw, 44px);">Explore Pelican-Unified 1.0</h2>
+        <h3 style="font-size: 36px; text-align: center; margin:0 0 28px;">Explore Pelican-Unified 1.0</h3>
         <div class="resource-grid">
-          <a class="resource-link" href="https://ai.meta.com/" target="_blank"><span>More from AI at Meta</span><span>↗</span></a>
           <a class="resource-link" href="https://arxiv.org/" target="_blank"><span>Read the research paper</span><span>↗</span></a>
           <a class="resource-link" href="https://huggingface.co/" target="_blank"><span>Pelican-Unified 1.0 on Hugging Face</span><span>↗</span></a>
           <a class="resource-link" href="https://github.com/" target="_blank"><span>Download Pelican-Unified 1.0</span><span>↗</span></a>
           <a class="resource-link" href="https://ai.meta.com/research/" target="_blank"><span>Read more about Pelican-Unified 1.0</span><span>↗</span></a>
-          <a class="resource-link" href="https://ai.meta.com/research/" target="_blank"><span>Download Pelican-Unified 1.0</span><span>↗</span></a>
         </div>
       </div>
     </section>
